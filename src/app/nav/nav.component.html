@@ -1,0 +1,56 @@
+
+ <nav class="navbar">
+  <!-- Top Section: Logo and Search Bar -->
+  <div class="navbar-top">
+    <!-- Logo -->
+    <div class="navbar-logo">
+      <i class="fas fa-shopping-bag"></i>
+      <span>E Shop</span>
+    </div>
+
+    <!-- Search Bar -->
+    <!-- <div class="navbar-search">
+      <input
+        type="text"
+        placeholder="Search for products..."
+      />
+      <button (click)="handleSearch()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div> -->
+
+    <!-- User Menu registration-->
+    <div class="navbar-menu">
+      <!-- <div class="navbar-item" *ngIf="!userId">
+        <button class="btn btn-primary" routerLink="/registration">Sign-in</button>
+     </div> -->
+      <div class="navbar-item" *ngIf="!userId">
+        <button class="btn btn-secondary" routerLink="/login"> login</button>
+        <!-- <i class="fas fa-chevron-down"></i> -->
+      </div>
+      <!-- <div class="navbar-item">
+        <span>My Account</span>
+        <i class="fas fa-chevron-down"></i>
+      </div> -->
+      <div class="navbar-item" routerLink="/cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart ({{ count }})</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Links -->
+  <div class="navbar-links">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/products" *ngIf="role=='1'" routerLinkActive="active">Products</a>
+    <div class="dropdown">
+      <button class="dropdown-button">Pages</button>
+      <div class="dropdown-content">
+        <a routerLink="/about" routerLinkActive="active">About Us</a>
+        <a routerLink="/faq" routerLinkActive="active">FAQ</a>
+      </div>
+    </div>
+    <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
+  </div>
+</nav>
+

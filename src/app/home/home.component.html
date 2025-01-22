@@ -1,0 +1,85 @@
+<app-nav></app-nav>
+<div class="container py-5">
+  <button style="background-color: blue;border-radius: 10px;width: 80px;border: none;float: right;color: #fff;" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#marshall">Filter</button>
+
+
+  <!-- Responsive Grid -->
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <!-- Loop through products -->
+    <div class="col" *ngFor="let product of filteredProducts">
+      <div class="card h-100">
+        <!-- Product Image -->
+        <img
+          [src]="'http://localhost:3000/'+product.image"
+          class="card-img-top"
+          [alt]="product.name"
+        />
+
+        <!-- Product Details -->
+        <div class="card-body text-center">
+          <p class="text-muted mb-1">{{ product.category }}</p>
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="fw-bold">${{ product.price }}</p>
+
+          <!-- Sizes -->
+          <div class="d-flex justify-content-center gap-2 mb-3">
+            <button
+              *ngFor="let size of product.sizes"
+              class="btn btn-outline-secondary btn-sm"
+            >
+              {{ size }}
+            </button>
+            <button class="button1"  (click)="addToCart(product)" routerLink="/cart">Cart</button>
+          </div>
+
+          <!-- Colors -->
+          <div class="d-flex justify-content-center gap-2">
+            <span
+              *ngFor="let color of product.colors"
+              class="rounded-circle"
+              [style.backgroundColor]="color"
+              style="width: 20px; height: 20px; display: inline-block;"
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="marshall" tabindex="-1" aria-labelledby="marshallLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="marshallLabel">Filter</h5>
+        <button type="button" class="btn-close" #closepop data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="filter-card">
+          <h3>Filters</h3>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" class="form-control" multiple [(ngModel)]="selectedCategories">
+              <option value="">All Categories</option>
+              <option *ngFor="let product of products" [value]="product.category">
+                {{ product.category }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="min-price">Min Price</label>
+            <input type="number" id="min-price" class="form-control" [(ngModel)]="minPrice" />
+          </div>
+          <div class="form-group">
+            <label for="max-price">Max Price</label>
+            <input type="number" id="max-price" class="form-control" [(ngModel)]="maxPrice" />
+          </div>
+          <button class="btn btn-primary" (click)="applyFilters()">Apply</button>
+          <button class="btn btn-secondary" (click)="clearFilters()">Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

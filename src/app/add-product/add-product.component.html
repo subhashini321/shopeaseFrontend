@@ -1,0 +1,80 @@
+<app-nav></app-nav>
+
+
+<!-- Button to open modal (Bootstrap Modal) -->
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#marshall">
+    Add New Product
+  </button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="marshall" tabindex="-1" aria-labelledby="marshallLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="marshallLabel">Add New Product</h5>
+        <button type="button" class="btn-close" #closepop data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="name">Product Name</label>
+            <input id="name" formControlName="name" type="text" class="form-control" />
+            <div *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid" class="error-message">
+              <small *ngIf="productForm.get('name')?.hasError('required')">Name is required.</small>
+              <small *ngIf="productForm.get('name')?.hasError('minlength')">Name must be at least 3 characters long.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Category </label>
+            <textarea id="description" formControlName="category" class="form-control"></textarea>
+            <div *ngIf="productForm.get('description')?.touched && productForm.get('description')?.invalid" class="error-message">
+              <small *ngIf="productForm.get('description')?.hasError('required')">Description is required.</small>
+              <small *ngIf="productForm.get('description')?.hasError('minlength')">Description must be at least 10 characters long.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input id="price" formControlName="price" type="number" class="form-control" />
+            <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid" class="error-message">
+              <small *ngIf="productForm.get('price')?.hasError('required')">Price is required.</small>
+              <small *ngIf="productForm.get('price')?.hasError('min')">Price must be a positive number.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input id="bannerImg" type="file" (change)="getBannerImage($event)" #fileInput />
+
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Add Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product List Table -->
+<div class="product-table">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price}}</td>
+        <td><img [src]="'http://localhost:3000/'+product.image" alt="Product Image" style="width: 50px; height: auto;" /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

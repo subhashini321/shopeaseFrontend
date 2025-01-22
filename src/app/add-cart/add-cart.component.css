@@ -1,0 +1,57 @@
+.shopping-cart {
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead th {
+  text-align: left;
+  padding: 10px;
+  background: #f4f4f4;
+}
+
+tbody td {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+}
+
+.product-details img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+}
+
+.quantity button {
+  padding: 5px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.quantity input {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.cart-footer a {
+  color: #ff4081;
+  text-decoration: none;
+  font-weight: bold;
+}
